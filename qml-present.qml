@@ -90,8 +90,10 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
     }
 
     Slide {
+        id: sdkSlide
         title: "The Ubuntu SDK"
         icon: "/Users/mspencer/Dropbox/Presentation/ubuntu-sdk.png"
+        oneAtATime: true
 
         content: [
             "The Ubuntu SDK is the toolkit for developing for Ubuntu",
@@ -101,6 +103,7 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
         ]
 
         extra: ExtraItem {
+            visible: sdkSlide.index == 2
             Image {
                 id: icon1
                 anchors {
@@ -230,6 +233,7 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
 
     Slide {
         title: "Apps I've Developed"
+        oneAtATime: true
         content: [
             "Project Dashboard",
             "Taskly",

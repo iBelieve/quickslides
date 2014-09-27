@@ -25,8 +25,15 @@ Item {
         }
     }
 
+    signal transitionTo
+    signal transitionAway
+
     ParallelAnimation {
         id: hideAnimation
+
+        ScriptAction {
+            script: transitionAway()
+        }
 
         NumberAnimation {
             target: slide; property: "opacity";
@@ -45,6 +52,10 @@ Item {
         PauseAnimation { duration: 300 }
 
         ParallelAnimation {
+            ScriptAction {
+                script: transitionTo()
+            }
+
             NumberAnimation {
                 target: slide; property: "opacity";
                 duration: 300; from: 0; to: 1

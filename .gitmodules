@@ -1,0 +1,3 @@
+[submodule "quartz-ui"]
+	path = quartz-ui
+	url = https://github.com/sonrisesoftware/quartz-ui.git

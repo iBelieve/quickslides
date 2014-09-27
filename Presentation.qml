@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtGraphicalEffects 1.0
+import "quartz-ui"
 
 Window {
     id: root
@@ -30,8 +31,27 @@ Window {
     property color titleColor: "#555"
     property color linkColor: "#428bca"
 
+    Theme {
+        id: theme
+    }
+
     QtObject {
         id: _units
+
+        function fontSize(size) {
+            if (size === "xx-large")
+                return gu(2.7)
+            else if (size === "x-large")
+                return gu(2.4)
+            else if (size === "large")
+                return gu(2.2)
+            else if (size === "medium")
+                return gu(1.9)
+            else if (size === "small")
+                return gu(1.6)
+            else
+                return Number(size)
+        }
 
         function gu(units) {
             if (units === "xx-large")
@@ -60,10 +80,14 @@ Window {
     }
 
     function goToNextSlide() {
-        if (root.currentSlide + 1 < root.slides.length) {
+        if (root.slides[currentSlide].oneAtATime && root.slides[currentSlide].hasMore) {
+            root.slides[currentSlide].index++
+        } else if (root.currentSlide + 1 < root.slides.length) {
             var from = slides[currentSlide]
             var to = slides[currentSlide + 1]
             if (switchSlides(from, to, true)) {
+                if (to.oneAtATime)
+                    to.index = 0
                 currentSlide = currentSlide + 1;
                 content.focus = true;
             }
@@ -71,12 +95,16 @@ Window {
     }
 
     function goToPreviousSlide() {
-        if (root.currentSlide - 1 >= 0) {
+        if (root.slides[currentSlide].oneAtATime && root.slides[currentSlide].index > 0) {
+            root.slides[currentSlide].index--
+        } else if (root.currentSlide > 0) {
             var from = slides[currentSlide]
             var to = slides[currentSlide - 1]
-           if (switchSlides(from, to, false)) {
+            if (switchSlides(from, to, false)) {
+                if (to.hasOwnProperty("index") && to.oneAtATime)
+                    to.index = to.count - 1
                 currentSlide = currentSlide - 1;
-               content.focus = true;
+                content.focus = true;
            }
         }
     }

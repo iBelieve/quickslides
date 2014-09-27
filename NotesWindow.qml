@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
+import "quartz-ui"
 
 Window {
     title: "Presentation Notes"
@@ -131,5 +132,30 @@ Window {
         if (type === 's' || type === 'm' || type === 'h' || (type === '?' && hours >= 1))
             str = "%1h %2".arg(hours).arg(str)
         return str.trim()
+    }
+
+    Button {
+        style: timer.running ? "danger" : "success"
+        text: timer.running ? "Pause" : "Start"
+
+        onClicked: {
+            if (timer.running)
+                timer.stop()
+            else
+                start()
+        }
+
+        anchors {
+            left: parent.left
+            bottom: parent.bottom
+
+            margins: units.gu(2)
+        }
+    }
+
+    ToolTip {
+        id: appToolTip
+        z: 3
+        //anchors.centerIn: parent
     }
 }

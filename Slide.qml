@@ -12,6 +12,34 @@ BaseSlide {
 
     property alias icon: image.source
 
+    property int count: content.length
+    property bool oneAtATime: false
+    property bool hasMore: index < count - 1
+
+    property int index: -1
+
+    onTransitionTo: {
+        if (!oneAtATime) {
+            index = -1
+            timer.start()
+        }
+    }
+
+    onTransitionAway: {
+        index = -1
+    }
+
+    Timer {
+        id: timer
+        interval: 250
+        repeat: true
+        onTriggered: {
+            index++
+            if (!hasMore)
+                timer.stop()
+        }
+    }
+
     Row {
         id: titleArea
 
@@ -75,14 +103,26 @@ BaseSlide {
                 property real indentFactor: (10 - row.indentLevel * 2) / 10;
 
                 height: text.height + (nextIndentLevel == 0 ? 1 : 0.3) * slide.baseFontSize * slide.bulletSpacing
-                x: slide.baseFontSize * indentLevel
+                x: slide.index >= index
+                   ? slide.baseFontSize * indentLevel
+                   : - slide.contentWidth/2
+
+                opacity: slide.index >= index ? 1 : 0
+
+                Behavior on opacity {
+                    NumberAnimation { duration: 500 }
+                }
+
+                Behavior on x {
+                    NumberAnimation { duration: 500 }
+                }
 
                 Rectangle {
                     id: dot
-                    y: baseFontSize * row.indentFactor / 2
-                    width: baseFontSize / 4
-                    height: baseFontSize / 4
-                    color: textColor
+                    y: (baseFontSize * row.indentFactor)/2 - height/3
+                    width: baseFontSize * 0.4
+                    height: baseFontSize * 0.4
+                    color: "#772953"//"#dd4814"
                     radius: width / 2
                     smooth: true
                     opacity: text.text.length == 0 ? 0 : 1
@@ -90,19 +130,23 @@ BaseSlide {
 
                 Rectangle {
                     id: space
-                    width: dot.width * 2
+                    width: dot.width// * 2
                     height: 1
                     color: "#00ffffff"
                 }
 
                 Label {
                     id: text
-                    width: slide.contentWidth - parent.x - dot.width - space.width
+                    width: slide.contentWidth - (slide.baseFontSize * indentLevel) - dot.width - space.width
                     font.pixelSize: baseFontSize * row.indentFactor
                     text: colorLinks(content[index].substring(row.indentLevel))
                     wrapMode: Text.WordWrap
-                    color: textColor
+                    color: index == slide.index && slide.oneAtATime ? "#dd4814" : textColor
                     horizontalAlignment: Text.AlignLeft
+
+                    Behavior on color {
+                        ColorAnimation { duration: 500 }
+                    }
                 }
             }
         }
