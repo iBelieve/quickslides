@@ -1,4 +1,4 @@
-import QtQuick 2.2
+import QtQuick 2.3
 
 Presentation {
 
@@ -37,7 +37,7 @@ I’ve worked with over dozen or so different programming languages and technolo
 
     Slide {
         title: "So... what is Ubuntu?"
-        icon: "/Users/mspencer/Dropbox/Presentation/ubuntu-logo.png"
+        icon: "images/ubuntu-logo.png"
 
         content: [
             "Ubuntu is the powerful open-source operating system from Canonical",
@@ -45,11 +45,9 @@ I’ve worked with over dozen or so different programming languages and technolo
             "Focus on \"convergence\""
         ]
 
-        extra: Image {
-            anchors.fill: parent
-
-            fillMode: Image.PreserveAspectFit
-            source: "/Users/mspencer/Dropbox/Presentation/ubuntu-devices.png"
+        extra: ImageItem {
+            showShadow: false
+            source: "images/ubuntu-devices.png"
         }
 
         notes: "Ok, so most if not all of you are probably wonder what Ubuntu even is. Ubuntu is an operating system, just like Mac OS or Windows, developed by a UK-based company named Canonical. There are many unique and awesome things about Ubuntu, but probably the biggest thing about it is that is open-source. What that means is that the entire source code that makes up the OS is public and available for anyone to look and even to make there own operating systems based on Ubuntu.
@@ -63,7 +61,7 @@ Here’s a picture of what that will be like. The biggest thing about this is th
 
     Slide {
         title: "Why Develop for Ubuntu?"
-        icon: "/Users/mspencer/Dropbox/Presentation/ubuntu-logo.png"
+        icon: "images/ubuntu-logo.png"
 
         content: [
             "Cheaper to get started - no heavy fees",
@@ -73,11 +71,9 @@ Here’s a picture of what that will be like. The biggest thing about this is th
             "Access to all the source code"
         ]
 
-        extra: Image {
-            anchors.fill: parent
-
-            fillMode: Image.PreserveAspectFit
-            source: "/Users/mspencer/Dropbox/Presentation/showdown.png"
+        extra: ImageItem {
+            showShadow: false
+            source: "images/showdown.png"
         }
 
         notes: "Apple costs $100/year - many developers never break even
@@ -92,7 +88,7 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
     Slide {
         id: sdkSlide
         title: "The Ubuntu SDK"
-        icon: "/Users/mspencer/Dropbox/Presentation/ubuntu-sdk.png"
+        icon: "images/ubuntu-sdk.png"
         oneAtATime: true
 
         content: [
@@ -113,7 +109,8 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
                     margins: units.scale(2)
                 }
 
-                source: "/Users/mspencer/Dropbox/Presentation/ubuntu-logo.png"
+                mipmap: true
+                source: "images/ubuntu-logo.png"
                 height: width
 
                 SequentialAnimation {
@@ -167,7 +164,8 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
                     margins: units.scale(2)
                 }
 
-                source: "/Users/mspencer/Dropbox/Presentation/ubuntu-logo.png"
+                mipmap: true
+                source: "images/ubuntu-logo.png"
                 height: width
 
                 SequentialAnimation {
@@ -216,31 +214,41 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
 
     Slide {
         title: "Ubuntu Core Apps"
+        icon: "images/files-icon.png"
         content: [
             "Community-developed apps for Ubuntu",
             "I started contributing last June",
-            "Now I'm the one of the two lead UI developers for the File Manager",
+            "I worked as the one of the two lead UI developers for the File Manager",
             "I've fixed bugs, added new features, and handled feedback on social media"
         ]
-        extra: ExtraItem {
-            Label {
-                anchors.centerIn: parent
-                opacity: 0.5
-                text: "TODO: Screenshot of File Manager"
-            }
+        extra: ImageItem {
+            source: "images/filemanager.png"
         }
     }
 
     Slide {
+        id: appsSlide
         title: "Apps I've Developed"
         oneAtATime: true
         content: [
             "Project Dashboard",
             "Taskly",
+            "uBible",
             "Weather Desktop",
-            "Weekly Planner",
-            "uBible"
+            "Weekly Planner"
         ]
+
+        extra: ImageSet {
+            index: appsSlide.index
+            showShadow: index >= 3
+            sources: [
+                "images/taskly-phone.png",
+                "images/taskly-phone.png",
+                "images/ubible-phone.png",
+                "images/weather-desktop.png",
+                "images/weekly-planner.png"
+            ]
+        }
     }
 
     Slide {
@@ -263,6 +271,10 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
             "Develop apps for Ubuntu and other OSes",
             "Website is <a href=\"www.sonrisesoftware.com\">www.sonrisesoftware.com</a>"
         ]
+
+        extra: ImageItem {
+            source: Qt.resolvedUrl("images/website.png")
+        }
     }
 
     Slide {
@@ -278,11 +290,10 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
     }
 
     Image {
-        source: "/Users/mspencer/Dropbox/Logos/logo_text.png"
+        source: Qt.resolvedUrl("images/logo.png")
         width: units.scale(20)
         height: width * sourceSize.height/sourceSize.width
-        smooth: true
-        antialiasing: true
+        mipmap: true
         anchors {
             right: parent.right
             top: parent.top

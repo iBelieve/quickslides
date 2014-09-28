@@ -185,13 +185,27 @@ Window {
             id: mouseArea
             anchors.fill: parent
             acceptedButtons: Qt.LeftButton | Qt.RightButton
+            hoverEnabled: true
             onClicked: {
                 if (mouse.button == Qt.RightButton)
                     goToPreviousSlide()
                 else
                     goToNextSlide()
             }
+
             onPressAndHold: goToPreviousSlide(); //A back mechanism for touch only devices
         }
+    }
+
+    ControlBar {
+        id: panel
+
+        show: parent.height - mouseArea.mouseY < height * 2
+    }
+
+    ToolTip {
+        id: appToolTip
+        z: 3
+        //anchors.centerIn: parent
     }
 }
