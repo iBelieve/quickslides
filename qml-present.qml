@@ -287,9 +287,9 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
 
         extra: ImageSet {
             index: appsSlide.index
-            showShadow: index >= 3
+            showShadow: index == 0 || index >= 3
             sources: [
-                "images/taskly-phone.png",
+                "images/project-dashboard-project.png",
                 "images/taskly-phone.png",
                 "images/ubible-phone.png",
                 "images/weather-desktop.png",
