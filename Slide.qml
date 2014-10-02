@@ -151,8 +151,4 @@ BaseSlide {
             }
         }
     }
-
-    function colorLinks(text) {
-        return text.replace(/<a(.*?)>(.*?)</g, "<a $1><font color=\"" + linkColor + "\">$2</font><")
-    }
 }

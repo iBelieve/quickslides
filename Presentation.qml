@@ -79,6 +79,17 @@ Window {
         return true
     }
 
+    function goToSlide(index) {
+        var from = slides[currentSlide]
+        var to = slides[index]
+        if (switchSlides(from, to, true)) {
+            if (to.oneAtATime)
+                to.index = 0
+            currentSlide = index;
+            content.focus = true;
+        }
+    }
+
     function goToNextSlide() {
         if (root.slides[currentSlide].oneAtATime && root.slides[currentSlide].hasMore) {
             root.slides[currentSlide].index++
@@ -203,9 +214,50 @@ Window {
         show: parent.height - mouseArea.mouseY < height * 2
     }
 
+    property bool overlayOpen: currentOverlay !== null
+    property PopupBase currentOverlay: null
+    property alias overlayLayer: overlay
+
+    Rectangle {
+        anchors.fill: parent
+
+        color: currentOverlay !== null ? currentOverlay.overlayColor : "transparent"
+        opacity: overlayOpen ? 1 : 0
+        visible: opacity > 0
+
+        Behavior on opacity {
+            NumberAnimation { duration: 200 }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: currentOverlay.close()
+        }
+    }
+
+    Item {
+        id: overlay
+        anchors.fill: parent
+    }
+
+    onWidthChanged: {
+        if (currentOverlay)
+            currentOverlay.close()
+    }
+
+    onHeightChanged: {
+        if (currentOverlay)
+            currentOverlay.close()
+    }
+
     ToolTip {
         id: appToolTip
         z: 3
         //anchors.centerIn: parent
+    }
+
+    function colorLinks(text) {
+        return text.replace(/<a(.*?)>(.*?)</g, "<a $1><font color=\"" + linkColor + "\">$2</font><")
     }
 }

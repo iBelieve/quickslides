@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import "quartz-ui"
+import "quartz-ui/ListItems" as ListItem
 
 Rectangle {
     id: widget
@@ -9,7 +10,7 @@ Rectangle {
         bottom: parent.bottom
         left: parent.left
         right: parent.right
-        bottomMargin: show ? 0 : -height
+        bottomMargin: show || popover.showing ? 0 : -height
 
         Behavior on bottomMargin {
             NumberAnimation { duration: 200 }
@@ -39,6 +40,19 @@ Rectangle {
         Button {
             iconName: "chevron-right"
         }
+
+        Button {
+            iconName: "list"
+            selected: popover.showing
+            onClicked: popover.open(caller)
+        }
+    }
+
+    Label {
+        anchors.centerIn: parent
+        text: "Slide " + (currentSlide + 1) + " of " + slides.length
+        font.pixelSize: units.gu(2.2)
+        color: "#666"
     }
 
     Row {
@@ -57,6 +71,24 @@ Rectangle {
                     root.visibility = Window.Maximized
                 else
                     root.visibility = Window.FullScreen
+            }
+        }
+    }
+
+    ListPopover {
+        id: popover
+
+        width: units.gu(30)
+
+        model: slides
+        delegate: ListItem.Standard {
+            showDivider: false
+            height: units.gu(3)
+            highlightable: true
+            text: index == 0 ? "<b>%1</b>".arg(modelData.title) : modelData.title
+            onClicked: {
+                popover.close()
+                goToSlide(index)
             }
         }
     }

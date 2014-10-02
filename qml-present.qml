@@ -6,6 +6,33 @@ Presentation {
         title: "Ubuntu App Development"
         subTitle: "What Ubuntu Is, Developing for Ubuntu, And What I've Worked On"
 
+        titleView: Row {
+            Image {
+                width: units.scale(7)
+                height: width
+                source: "images/ubuntu-logo.png"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            Label {
+                text: "+"
+                font.pixelSize: units.gu(9)
+                color: "#555"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: -units.scale(0.5)
+            }
+
+            Image {
+                width: units.scale(8)
+                height: width
+                source: "images/ubuntu-sdk.png"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
+            spacing: units.scale(2)
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
         notes: "Good evening. My name is Michael Spencer, and I’ve been interested in software engineering ever since I first learned to program for a Calculus course about 5 years ago.
 
 Software development is a facinating subject since you get to build an app, watch in come together, and then publish it and earn money from it. And if you do it well, you can earn a lot of money. Flappy bird, a iOS app was recently the top app and earned its developer $50,000 a day.
@@ -94,122 +121,141 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
         content: [
             "The Ubuntu SDK is the toolkit for developing for Ubuntu",
             "Based on a QtQuick, a declarative programming language",
-            "Layouts based on anchors",
-            "Property bindings"
+            "Layouts based on anchors"
         ]
 
-        extra: ExtraItem {
-            visible: sdkSlide.index == 2
-            Image {
-                id: icon1
-                anchors {
-                    left: parent.left
-                    top: parent.top
+        extra: [
+            ExtraItem {
+                visible: sdkSlide.index == 2
+                Image {
+                    id: icon1
+                    anchors {
+                        left: parent.left
+                        top: parent.top
 
-                    margins: units.scale(2)
-                }
-
-                mipmap: true
-                source: "images/ubuntu-logo.png"
-                height: width
-
-                SequentialAnimation {
-                    running: true
-                    loops: Animation.Infinite
-
-                    NumberAnimation {
-                        target: icon1
-                        property: "width"
-                        from: units.scale(3)
-                        to: units.scale(6)
-                        duration: 1000
+                        margins: units.scale(2)
                     }
 
-                    NumberAnimation {
-                        target: icon1
-                        property: "width"
-                        from: units.scale(6)
-                        to: units.scale(3)
-                        duration: 1000
+                    mipmap: true
+                    source: "images/ubuntu-logo.png"
+                    height: width
+
+                    SequentialAnimation {
+                        running: true
+                        loops: Animation.Infinite
+
+                        NumberAnimation {
+                            target: icon1
+                            property: "width"
+                            from: units.scale(3)
+                            to: units.scale(6)
+                            duration: 1000
+                        }
+
+                        NumberAnimation {
+                            target: icon1
+                            property: "width"
+                            from: units.scale(6)
+                            to: units.scale(3)
+                            duration: 1000
+                        }
                     }
                 }
-            }
 
-            Label {
-                x: units.scale(6)
-                y: units.scale(2)
-                text: "Absolute positioning example"
-            }
-
-            Label {
-                anchors {
-                    left: parent.left
-                    top: parent.top
-                    topMargin: units.scale(9)
-
-                    margins: units.scale(2)
-                }
-                text: "Label {\n    x: 48\n    y: 16\n}"
-                font.pixelSize: units.scale(1.6)
-                color: "#555"
-            }
-
-            Image {
-                id: icon2
-                anchors {
-                    left: parent.left
-                    top: parent.top
-                    topMargin: units.scale(20)
-
-                    margins: units.scale(2)
+                Label {
+                    x: units.scale(6)
+                    y: units.scale(2)
+                    text: "Absolute positioning example"
                 }
 
-                mipmap: true
-                source: "images/ubuntu-logo.png"
-                height: width
+                Label {
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        topMargin: units.scale(9)
 
-                SequentialAnimation {
-                    running: true
-                    loops: Animation.Infinite
+                        margins: units.scale(2)
+                    }
+                    text: "Label {\n    x: 48\n    y: 16\n}"
+                    font.pixelSize: units.scale(1.6)
+                    color: "#555"
+                }
 
-                    NumberAnimation {
-                        target: icon2
-                        property: "width"
-                        from: units.scale(3)
-                        to: units.scale(6)
-                        duration: 1000
+                Image {
+                    id: icon2
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        topMargin: units.scale(20)
+
+                        margins: units.scale(2)
                     }
 
-                    NumberAnimation {
-                        target: icon2
-                        property: "width"
-                        from: units.scale(6)
-                        to: units.scale(3)
-                        duration: 1000
+                    mipmap: true
+                    source: "images/ubuntu-logo.png"
+                    height: width
+
+                    SequentialAnimation {
+                        running: true
+                        loops: Animation.Infinite
+
+                        NumberAnimation {
+                            target: icon2
+                            property: "width"
+                            from: units.scale(3)
+                            to: units.scale(6)
+                            duration: 1000
+                        }
+
+                        NumberAnimation {
+                            target: icon2
+                            property: "width"
+                            from: units.scale(6)
+                            to: units.scale(3)
+                            duration: 1000
+                        }
                     }
                 }
-            }
 
-            Label {
-                anchors.verticalCenter: icon2.verticalCenter
-                anchors.left: icon2.right
-                anchors.margins: units.scale(2)
-                text: "Anchoring example"
-            }
-
-            Label {
-                anchors {
-                    left: parent.left
-                    top: parent.top
-                    topMargin: units.scale(27)
-
-                    margins: units.scale(2)
+                Label {
+                    anchors.verticalCenter: icon2.verticalCenter
+                    anchors.left: icon2.right
+                    anchors.margins: units.scale(2)
+                    text: "Anchoring example"
                 }
-                text: "Label {\n    anchors.left: image.right\n    anchors.verticalCenter: image.verticalCenter\n}"
-                font.pixelSize: units.scale(1.6)
-                color: "#555"
+
+                Label {
+                    anchors {
+                        left: parent.left
+                        top: parent.top
+                        topMargin: units.scale(27)
+
+                        margins: units.scale(2)
+                    }
+                    text: "Label {\n    anchors.left: image.right\n    anchors.verticalCenter: image.verticalCenter\n}"
+                    font.pixelSize: units.scale(1.6)
+                    color: "#555"
+                }
+            },
+
+            ImageItem {
+                visible: sdkSlide.index == 0
+                source: "images/qt-creator.png"
+            },
+
+            Item {
+                anchors.fill: parent
+
+                Image {
+                    visible: sdkSlide.index == 1
+                    anchors.centerIn: parent
+                    width: units.gu(15)
+                    height: width * sourceSize.height/sourceSize.width
+                    source: "images/qt-logo.png"
+                }
             }
-        }
+
+        ]
     }
 
     Slide {
@@ -228,6 +274,7 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
 
     Slide {
         id: appsSlide
+        icon: "images/ubuntu-sdk.png"
         title: "Apps I've Developed"
         oneAtATime: true
         content: [
@@ -252,6 +299,7 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
     }
 
     Slide {
+        icon: "images/project-dashboard-icon.png"
         title: "Project Dashboard"
         content: [
             "Manages your projects in one convenient app",
@@ -261,9 +309,13 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
             " Porting to Mac and Windows",
             " Pro account subscriptions"
         ]
+        extra: ImageItem {
+            source: Qt.resolvedUrl("images/project-dashboard-overview.png")
+        }
     }
 
     Slide {
+        icon: "images/sonrisesoftware.png"
         title: "Sonrise Software"
         content: [
             "My business developing and selling apps",
@@ -287,6 +339,60 @@ Access to all the source code - several times Ubuntu hasn’t provided exactly w
             " Won 1st place in the 2014 Ubuntu App Showdown",
             " Run my own business developing and selling apps"
         ]
+
+        extra: Item {
+            anchors.fill: parent
+            Column {
+                anchors.centerIn: parent
+                spacing: units.scale(1)
+
+                Row {
+                    Image {
+                        width: units.scale(7)
+                        height: width
+                        source: "images/ubuntu-logo.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Label {
+                        text: "+"
+                        anchors.verticalCenterOffset: -units.scale(0.5)
+                        font.pixelSize: units.gu(9)
+                        color: "#666"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    Image {
+                        width: units.scale(8)
+                        height: width
+                        source: "images/ubuntu-sdk.png"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
+
+                    spacing: units.scale(2)
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Label {
+                    text: "Go build your own apps!"
+                    color: "#dd4814"
+                    fontSize: "large"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Label {
+                    text: colorLinks("Get started at <a href=\"http://developer.ubuntu.com\">developer.ubuntu.com</a>")
+                    font.pixelSize: units.scale(2.5)
+                    color: "#888"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Item {
+                    width: parent.width
+                    height: units.scale(4)
+                }
+            }
+        }
     }
 
     Image {
