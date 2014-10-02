@@ -78,7 +78,7 @@ Rectangle {
     ListPopover {
         id: popover
 
-        width: units.gu(30)
+        width: units.gu(32)
 
         model: slides
         delegate: ListItem.Standard {
@@ -89,6 +89,19 @@ Rectangle {
             onClicked: {
                 popover.close()
                 goToSlide(index)
+            }
+
+            Icon {
+                name: "check-circle"
+                visible: index == currentSlide
+                color: "#888"
+                anchors {
+                    right: parent.right
+                    rightMargin: units.gu(1.5)
+                    verticalCenter: parent.verticalCenter
+                }
+
+                size: units.gu(2)
             }
         }
     }
